@@ -32,8 +32,6 @@
     setTimeout(() => {
       btn.classList.remove('loading');
       validate();
-      msg.textContent = 'This is a demo page. No data is sent anywhere.';
-      msg.hidden = false;
     }, 1200);
   });
 
@@ -45,3 +43,4 @@
   // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
+
