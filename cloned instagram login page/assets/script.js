@@ -22,7 +22,6 @@
     pass.focus();
   });
 
-  // Demo submit: spinner only. Nothing is sent anywhere.
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (btn.disabled) return;
