@@ -1,0 +1,298 @@
+/* ---------- Tokens (tweak colors here) ---------- */
+:root {
+  --bg: #ffffff;
+  --text: #262626;
+  --muted: #737373;
+  --border: #dbdbdb;
+  --field: #fafafa;
+  --btn: #8c86fb;          /* disabled / default lavender */
+  --btn-active: #5b51f0;   /* when both fields are filled */
+  --btn-hover: #4a40e0;
+  --link: #5851db;
+  --fb: #385185;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --logo-font: "Grand Hotel", "Brush Script MT", cursive;
+}
+
+/* ---------- Reset ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button, select, input { font-family: inherit; }
+
+/* ---------- Page layout ---------- */
+.page {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 600px) 350px;
+  justify-content: center;
+  align-items: center;
+  column-gap: clamp(40px, 9vw, 160px);
+  padding: 40px 24px;
+}
+
+.hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: fade-in 0.7s ease both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Login column ---------- */
+.login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  font: 400 3.5rem/1 var(--logo-font);
+  margin: 8px 0 30px;
+  color: var(--text);
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ---------- Floating-label fields ---------- */
+.field { position: relative; }
+
+.field input {
+  width: 100%;
+  height: 48px;
+  padding: 14px 12px 0;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--field);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.field input:focus { border-color: #a8a8a8; }
+.field input[type="password"],
+.field input#password { padding-right: 64px; }
+
+.field label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  max-width: calc(100% - 24px);
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  transition: top 0.1s, font-size 0.1s;
+}
+
+.field input:not(:placeholder-shown) + label {
+  top: 14px;
+  font-size: 11px;
+}
+
+.toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.field input:placeholder-shown ~ .toggle { display: none; }
+
+/* ---------- Log in button ---------- */
+.btn-login {
+  position: relative;
+  height: 44px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--btn);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: background 0.15s;
+}
+
+.btn-login:not(:disabled) { background: var(--btn-active); cursor: pointer; }
+.btn-login:not(:disabled):hover { background: var(--btn-hover); }
+
+.btn-login.loading {
+  background: var(--btn-active);
+  color: transparent;
+  cursor: wait;
+}
+
+.btn-login.loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.form-msg {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---------- Divider, Facebook, links ---------- */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  margin: 34px 0 26px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.btn-fb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  background: none;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fb);
+  cursor: pointer;
+}
+
+.btn-fb img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.forgot {
+  margin-top: 26px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.signup {
+  margin-top: 80px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.signup a { color: var(--link); font-weight: 500; }
+.forgot:hover, .signup a:hover { text-decoration: underline; }
+
+a:focus-visible, button:focus-visible, select:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  padding: 0 24px 32px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.footer a:hover { text-decoration: underline; }
+
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 16px;
+}
+
+.lang {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 2px 16px 2px 0;
+  font-size: 12px;
+  color: var(--muted);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%23737373' stroke-width='1.5'%3E%3Cpath d='m1 1 4 4 4-4'/%3E%3C/svg%3E") right center no-repeat;
+  border: 0;
+  cursor: pointer;
+}
+
+/* ---------- Responsive ---------- */
+/* Like Instagram: hide the illustration on tablets and phones */
+@media (max-width: 900px) {
+  .page { grid-template-columns: minmax(0, 350px); }
+  .hero { display: none; }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 24px 20px; }
+  .logo { font-size: 3.2rem; margin-bottom: 26px; }
+  .signup { margin-top: 56px; }
+  .footer ul { gap: 6px 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
